@@ -7,7 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     tvShows: [],
-    episodes: [],
+    episodes: {},
     selectedShowId: '',
   },
   getters: {
@@ -21,6 +21,9 @@ export default new Vuex.Store({
       const { image } = (getters.selectedShow || {});
       return (image && image.original) || '';
     },
+    getEpisodes: state => id => (
+      state.episodes[id] || []
+    ),
   },
   /* eslint-disable no-param-reassign */
   mutations: {
@@ -32,6 +35,12 @@ export default new Vuex.Store({
     },
     resetShow: (state) => {
       state.selectedShowId = '';
+    },
+    addEpisodes: (state, { id, episodes }) => {
+      state.episodes = {
+        ...state.episodes,
+        ...{ [id]: episodes },
+      };
     },
   },
   /* eslint-enable no-param-reassign */
@@ -46,5 +55,16 @@ export default new Vuex.Store({
         commit('addShows', response)
       ))
     ),
+    fetchEpisodes: ({ commit, getters }, { id }) => {
+      if (!getters.getEpisodes(id).length) {
+        return api.getEpisodes(id).then(response => (
+          commit('addEpisodes', {
+            id,
+            episodes: response,
+          })
+        ));
+      }
+      return ''; // We don't actually care what is returned
+    },
   },
 });

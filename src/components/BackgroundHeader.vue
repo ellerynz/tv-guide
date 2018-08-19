@@ -25,6 +25,7 @@ export default {
 
 <style lang="scss">
 #nav {
+  text-align: center;
   padding: 30px;
   height: 300px;
   background-size: cover;

@@ -37,8 +37,13 @@ h3 {
 ul {
   list-style-type: none;
   padding: 0;
+  text-align: center;
 }
 a {
   color: #42b983;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
 }
 </style>

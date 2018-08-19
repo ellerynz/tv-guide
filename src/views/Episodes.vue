@@ -4,14 +4,18 @@
   </div>
   <div v-else>
     <p>Foo {{ id }}</p>
-    <img :alt="tvShow.name" :src="imagePath()">
+    <EpisodesList :showId="id" />
   </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
+import EpisodesList from '../components/EpisodesList.vue';
 
 export default {
+  components: {
+    EpisodesList,
+  },
   data: () => ({
     isLoading: true,
     tvShow: {
@@ -30,10 +34,6 @@ export default {
     this.selectShow(this.id);
   },
   methods: {
-    imagePath() {
-      const { image } = this.tvShow;
-      return image && image.original;
-    },
     ...mapMutations(['selectShow']),
   },
 };
