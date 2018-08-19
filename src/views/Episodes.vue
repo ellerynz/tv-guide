@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default {
   data: () => ({
@@ -27,12 +27,14 @@ export default {
   mounted() {
     this.tvShow = this.findShow(this.id) || {};
     this.isLoading = false;
+    this.selectShow(this.id);
   },
   methods: {
     imagePath() {
       const { image } = this.tvShow;
-      return image && image.medium;
+      return image && image.original;
     },
+    ...mapMutations(['selectShow']),
   },
 };
 </script>

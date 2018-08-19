@@ -8,16 +8,30 @@ export default new Vuex.Store({
   state: {
     tvShows: [],
     episodes: [],
+    selectedShowId: '',
   },
   getters: {
     findShow: state => id => (
       state.tvShows.find(tvShow => tvShow.id.toString() === id.toString())
     ),
+    selectedShow: (state, getters) => (
+      getters.findShow(state.selectedShowId) || {}
+    ),
+    selectedImageUrl: (state, getters) => {
+      const { image } = (getters.selectedShow || {});
+      return (image && image.original) || '';
+    },
   },
   /* eslint-disable no-param-reassign */
   mutations: {
     addShows: (state, shows) => {
       state.tvShows = shows;
+    },
+    selectShow: (state, id) => {
+      state.selectedShowId = id;
+    },
+    resetShow: (state) => {
+      state.selectedShowId = '';
     },
   },
   /* eslint-enable no-param-reassign */

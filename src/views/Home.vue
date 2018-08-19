@@ -1,11 +1,11 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld />
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue';
 
@@ -13,6 +13,12 @@ export default {
   name: 'home',
   components: {
     HelloWorld,
+  },
+  created() {
+    this.resetShow();
+  },
+  methods: {
+    ...mapMutations(['resetShow']),
   },
 };
 </script>

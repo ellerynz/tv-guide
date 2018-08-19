@@ -1,6 +1,5 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
     <ul>
       <li
         v-for="tvShow in tvShows"
@@ -19,9 +18,6 @@ import { mapState } from 'vuex';
 
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String,
-  },
   computed: {
     ...mapState(['tvShows']),
   },
@@ -41,10 +37,6 @@ h3 {
 ul {
   list-style-type: none;
   padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
 }
 a {
   color: #42b983;
