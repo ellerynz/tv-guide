@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>{{ name }} <span>(S{{ season }})</span></h3>
+    <h3>{{ name }}</h3>
     <img :src="imageUrl" />
     <div v-html="summary" />
   </div>

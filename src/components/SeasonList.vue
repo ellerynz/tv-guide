@@ -1,8 +1,14 @@
 <template>
   <div>
-    <div v-for="(episodes, season) in groupedEpisodes">
-      <h3 :id="seasonName(season)">
-        <a :href="'#' + seasonName(season)">Season {{ season }}</a>
+    <div>
+      <span v-for="seasonNumber in seasonNumbers">
+        <a :href="'#' + seasonName(seasonNumber)">Season {{ seasonNumber }}</a>
+        &nbsp;
+      </span>
+    </div>
+    <div v-for="(episodes, seasonNumber) in groupedEpisodes">
+      <h3 :id="seasonName(seasonNumber)">
+        <a :href="'#' + seasonName(seasonNumber)">Season {{ seasonNumber }}</a>
       </h3>
       <EpisodesList :episodes="episodes" />
     </div>
@@ -19,6 +25,11 @@ export default {
     groupedEpisodes: {
       type: Object,
       required: true,
+    },
+  },
+  computed: {
+    seasonNumbers() {
+      return Object.keys(this.groupedEpisodes);
     },
   },
   methods: {
