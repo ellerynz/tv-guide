@@ -3,18 +3,17 @@
     <p>Loading...</p>
   </div>
   <div v-else>
-    <p>Foo {{ id }}</p>
-    <EpisodesList :showId="id" />
+    <SeasonList :groupedEpisodes="groupedEpisodes"/>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
-import EpisodesList from '../components/EpisodesList.vue';
+import SeasonList from '../components/SeasonList.vue';
 
 export default {
   components: {
-    EpisodesList,
+    SeasonList,
   },
   data: () => ({
     isLoading: true,
@@ -27,11 +26,21 @@ export default {
   },
   computed: {
     ...mapGetters(['findShow']),
+    ...mapGetters({
+      groupedEpisodes: 'groupEpisodesBySeasons',
+    }),
   },
   mounted() {
     this.tvShow = this.findShow(this.id) || {};
-    this.isLoading = false;
     this.selectShow(this.id);
+
+    const component = this;
+    this.$store.dispatch({
+      type: 'fetchEpisodes',
+      id: this.id,
+    }).then(() => {
+      component.$data.isLoading = false;
+    });
   },
   methods: {
     ...mapMutations(['selectShow']),

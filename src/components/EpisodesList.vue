@@ -1,11 +1,8 @@
 <template>
-  <div v-if="isLoading">
-    <p>Loading...</p>
-  </div>
-  <ul v-else>
+  <ul>
     <fade-transition group>
       <li
-        v-for="episode in episodes(showId)"
+        v-for="episode in episodes"
         :key="episode.id"
         style="display:inline;"
       >
@@ -14,14 +11,13 @@
           :name="episode.name"
           :season="episode.season"
           :summary="episode.summary"
-          :imageUrl="episode.image.medium"
+          :image="episode.image"
         />
       </li>
     </fade-transition>
   </ul>
 </template>
 <script>
-import { mapGetters } from 'vuex';
 import { FadeTransition } from 'vue2-transitions';
 import EpisodeItem from './EpisodeItem.vue';
 
@@ -30,25 +26,11 @@ export default {
     FadeTransition,
     EpisodeItem,
   },
-  data: () => ({
-    isLoading: true,
-  }),
   props: {
-    showId: String,
-  },
-  computed: {
-    ...mapGetters({
-      episodes: 'getEpisodes',
-    }),
-  },
-  mounted() {
-    const component = this;
-    this.$store.dispatch({
-      type: 'fetchEpisodes',
-      id: this.showId,
-    }).then(() => {
-      component.$data.isLoading = false;
-    });
+    episodes: {
+      type: Array,
+      required: true,
+    },
   },
 };
 </script>

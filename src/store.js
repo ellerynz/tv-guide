@@ -4,27 +4,45 @@ import api from './tvmaze_client';
 
 Vue.use(Vuex);
 
+/* eslint-disable no-shadow */
+export const getters = {
+  findShow: state => id => (
+    state.tvShows.find(tvShow => tvShow.id.toString() === id.toString())
+  ),
+  selectedShow: (state, getters) => (
+    getters.findShow(state.selectedShowId) || {}
+  ),
+  selectedImageUrl: (state, getters) => {
+    const { image } = (getters.selectedShow || {});
+    return (image && image.original) || '';
+  },
+  getEpisodes: state => id => (
+    state.episodes[id] || []
+  ),
+  // { 'Season 1': [], ... }
+  groupEpisodesBySeasons: (state, getters) => {
+    const episodes = getters.getEpisodes(state.selectedShowId);
+    /* eslint-disable no-param-reassign */
+    return [...episodes].reduce((seasons, episode) => {
+      if (seasons[episode.season]) {
+        seasons[episode.season] = [...seasons[episode.season], episode];
+      } else {
+        seasons[episode.season] = [episode];
+      }
+      return seasons;
+    }, {}) || {};
+    /* eslint-enable no-param-reassign */
+  },
+};
+/* eslint-enable no-shadow */
+
 export default new Vuex.Store({
   state: {
     tvShows: [],
     episodes: {},
     selectedShowId: '',
   },
-  getters: {
-    findShow: state => id => (
-      state.tvShows.find(tvShow => tvShow.id.toString() === id.toString())
-    ),
-    selectedShow: (state, getters) => (
-      getters.findShow(state.selectedShowId) || {}
-    ),
-    selectedImageUrl: (state, getters) => {
-      const { image } = (getters.selectedShow || {});
-      return (image && image.original) || '';
-    },
-    getEpisodes: state => id => (
-      state.episodes[id] || []
-    ),
-  },
+  getters,
   /* eslint-disable no-param-reassign */
   mutations: {
     addShows: (state, shows) => {
@@ -55,6 +73,7 @@ export default new Vuex.Store({
         commit('addShows', response)
       ))
     ),
+    /* eslint-disable-next-line no-shadow */
     fetchEpisodes: ({ commit, getters }, { id }) => {
       if (!getters.getEpisodes(id).length) {
         return api.getEpisodes(id).then(response => (

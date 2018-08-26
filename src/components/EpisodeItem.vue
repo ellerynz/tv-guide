@@ -22,11 +22,18 @@ export default {
     },
     summary: {
       type: String,
-      required: true,
+      required: false,
+      default: () => 'No summary available.',
     },
-    imageUrl: {
-      type: String,
-      required: true,
+    image: {
+      type: Object,
+      required: false,
+      default: () => ({}),
+    },
+  },
+  computed: {
+    imageUrl() {
+      return (this.image && this.image.medium) || '';
     },
   },
 };

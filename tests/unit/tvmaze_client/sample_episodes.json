@@ -1,0 +1,171 @@
+[
+  {
+    "id": 4952,
+    "url": "http://www.tvmaze.com/episodes/4952/game-of-thrones-1x01-winter-is-coming",
+    "name": "Winter is Coming",
+    "season": 1,
+    "number": 1,
+    "airdate": "2011-04-17",
+    "airtime": "21:00",
+    "airstamp": "2011-04-18T01:00:00+00:00",
+    "runtime": 60,
+    "image": {
+      "medium": "http://static.tvmaze.com/uploads/images/medium_landscape/1/2668.jpg",
+      "original": "http://static.tvmaze.com/uploads/images/original_untouched/1/2668.jpg"
+    },
+    "summary": "<p>Lord Eddard Stark, ruler of the North, is summoned to court by his old friend, King Robert Baratheon, to serve as the King's Hand. Eddard reluctantly agrees after learning of a possible threat to the King's life. Eddard's bastard son Jon Snow must make a painful decision about his own future, while in the distant east Viserys Targaryen plots to reclaim his father's throne, usurped by Robert, by selling his sister in marriage.</p>",
+    "_links": {
+      "self": {
+        "href": "http://api.tvmaze.com/episodes/4952"
+      }
+    }
+  },
+  {
+    "id": 4953,
+    "url": "http://www.tvmaze.com/episodes/4953/game-of-thrones-1x02-the-kingsroad",
+    "name": "The Kingsroad",
+    "season": 1,
+    "number": 2,
+    "airdate": "2011-04-24",
+    "airtime": "21:00",
+    "airstamp": "2011-04-25T01:00:00+00:00",
+    "runtime": 60,
+    "image": {
+      "medium": "http://static.tvmaze.com/uploads/images/medium_landscape/1/2669.jpg",
+      "original": "http://static.tvmaze.com/uploads/images/original_untouched/1/2669.jpg"
+    },
+    "summary": "<p>An incident on the Kingsroad threatens Eddard and Robert's friendship. Jon and Tyrion travel to the Wall, where they discover that the reality of the Night's Watch may not match the heroic image of it.</p>",
+    "_links": {
+      "self": {
+        "href": "http://api.tvmaze.com/episodes/4953"
+      }
+    }
+  },
+
+  {
+    "id": 4962,
+    "url": "http://www.tvmaze.com/episodes/4962/game-of-thrones-2x01-the-north-remembers",
+    "name": "The North Remembers",
+    "season": 2,
+    "number": 1,
+    "airdate": "2012-04-01",
+    "airtime": "21:00",
+    "airstamp": "2012-04-02T01:00:00+00:00",
+    "runtime": 60,
+    "image": {
+      "medium": "http://static.tvmaze.com/uploads/images/medium_landscape/1/3174.jpg",
+      "original": "http://static.tvmaze.com/uploads/images/original_untouched/1/3174.jpg"
+    },
+    "summary": "<p>War grips the continent of Westeros. As Tyrion Lannister tries to take his strong-willed nephew in hand in King's Landing, Stannis Baratheon launches his own campaign to take the Iron Throne with the help of a mysterious priestess. In the east, Daenerys must lead her retinue through a desolate wasteland whilst beyond the Wall the Night's Watch seeks the aid of a wildling.</p>",
+    "_links": {
+      "self": {
+        "href": "http://api.tvmaze.com/episodes/4962"
+      }
+    }
+  },
+  {
+    "id": 4963,
+    "url": "http://www.tvmaze.com/episodes/4963/game-of-thrones-2x02-the-night-lands",
+    "name": "The Night Lands",
+    "season": 2,
+    "number": 2,
+    "airdate": "2012-04-08",
+    "airtime": "21:00",
+    "airstamp": "2012-04-09T01:00:00+00:00",
+    "runtime": 60,
+    "image": {
+      "medium": "http://static.tvmaze.com/uploads/images/medium_landscape/1/3175.jpg",
+      "original": "http://static.tvmaze.com/uploads/images/original_untouched/1/3175.jpg"
+    },
+    "summary": "<p>Stannis uses Ser Davos to seek out new allies for his war with the Lannisters. On the road north, Arya confides in Gendry. Robb Stark sends Theon Greyjoy to win an alliance with his father and the fierce warriors of the Iron Islands. Cersei and Tyrion clash on how to rule in King's Landing.</p>",
+    "_links": {
+      "self": {
+        "href": "http://api.tvmaze.com/episodes/4963"
+      }
+    }
+  },
+  {
+    "id": 4964,
+    "url": "http://www.tvmaze.com/episodes/4964/game-of-thrones-2x03-what-is-dead-may-never-die",
+    "name": "What is Dead May Never Die",
+    "season": 2,
+    "number": 3,
+    "airdate": "2012-04-15",
+    "airtime": "21:00",
+    "airstamp": "2012-04-16T01:00:00+00:00",
+    "runtime": 60,
+    "image": {
+      "medium": "http://static.tvmaze.com/uploads/images/medium_landscape/1/3176.jpg",
+      "original": "http://static.tvmaze.com/uploads/images/original_untouched/1/3176.jpg"
+    },
+    "summary": "<p>Catelyn Stark treats with King Renly in the hope of winning an alliance. Tyrion undertakes a complex plan in King's Landing to expose an enemy. At Winterfell, Bran's dreams continue to trouble him.</p>",
+    "_links": {
+      "self": {
+        "href": "http://api.tvmaze.com/episodes/4964"
+      }
+    }
+  },
+  {
+    "id": 4972,
+    "url": "http://www.tvmaze.com/episodes/4972/game-of-thrones-3x01-valar-dohaeris",
+    "name": "Valar Dohaeris",
+    "season": 3,
+    "number": 1,
+    "airdate": "2013-03-31",
+    "airtime": "21:00",
+    "airstamp": "2013-04-01T01:00:00+00:00",
+    "runtime": 60,
+    "image": {
+      "medium": "http://static.tvmaze.com/uploads/images/medium_landscape/1/2628.jpg",
+      "original": "http://static.tvmaze.com/uploads/images/original_untouched/1/2628.jpg"
+    },
+    "summary": "<p></p><p>Jon is brought before Mance Rayder, the King Beyond the Wall, while the Night's Watch survivors retreat south. In King's Landing, Tyrion asks for his reward. Littlefinger offers Sansa a way out. Cersei hosts a dinner for the royal family. Daenerys sails into Slaver's Bay.</p>",
+    "_links": {
+      "self": {
+        "href": "http://api.tvmaze.com/episodes/4972"
+      }
+    }
+  },
+  {
+    "id": 4973,
+    "url": "http://www.tvmaze.com/episodes/4973/game-of-thrones-3x02-dark-wings-dark-words",
+    "name": "Dark Wings, Dark Words",
+    "season": 3,
+    "number": 2,
+    "airdate": "2013-04-07",
+    "airtime": "21:00",
+    "airstamp": "2013-04-08T01:00:00+00:00",
+    "runtime": 60,
+    "image": {
+      "medium": "http://static.tvmaze.com/uploads/images/medium_landscape/1/2618.jpg",
+      "original": "http://static.tvmaze.com/uploads/images/original_untouched/1/2618.jpg"
+    },
+    "summary": "<p></p><p>Sansa (Sophie Turner) says too much. Shae (Sibel Kekilli) asks Tyrion (Peter Dinklage) for a favor. Jaime (Nikolaj Coster-Waldau) finds a way to pass the time. Arya (Maisie Williams) runs into the Brotherhood Without Banners.</p>",
+    "_links": {
+      "self": {
+        "href": "http://api.tvmaze.com/episodes/4973"
+      }
+    }
+  },
+  {
+    "id": 4974,
+    "url": "http://www.tvmaze.com/episodes/4974/game-of-thrones-3x03-walk-of-punishment",
+    "name": "Walk of Punishment",
+    "season": 3,
+    "number": 3,
+    "airdate": "2013-04-14",
+    "airtime": "21:00",
+    "airstamp": "2013-04-15T01:00:00+00:00",
+    "runtime": 60,
+    "image": {
+      "medium": "http://static.tvmaze.com/uploads/images/medium_landscape/1/2616.jpg",
+      "original": "http://static.tvmaze.com/uploads/images/original_untouched/1/2616.jpg"
+    },
+    "summary": "<p></p><p>Tyrion shoulders new responsibilities. Jon (Kit Harington) is taken to the Fist of the First Men. Daenerys (Emilia Clarke) meets with the slavers. Jaime strikes a deal with his captors.</p>",
+    "_links": {
+      "self": {
+        "href": "http://api.tvmaze.com/episodes/4974"
+      }
+    }
+  }
+]
