@@ -63,17 +63,25 @@ export default new Vuex.Store({
   },
   /* eslint-enable no-param-reassign */
   actions: {
-    findShow: ({ commit }) => (
-      api.findShow().then(response => (
-        commit(response)
-      ))
-    ),
+    // eslint-disable-next-line no-shadow
+    findShow: ({ commit, getters }, { id }) => {
+      // Check for the show locally first
+      if (getters.findShow(id)) {
+        commit('selectShow', id);
+        return id;
+      }
+
+      return api.findShow(id).then((response) => {
+        commit('addShows', [response]);
+        commit('selectShow', id);
+      });
+    },
     listShows: ({ commit }) => (
       api.listShows().then(response => (
         commit('addShows', response)
       ))
     ),
-    /* eslint-disable-next-line no-shadow */
+    // eslint-disable-next-line no-shadow
     fetchEpisodes: ({ commit, getters }, { id }) => {
       if (!getters.getEpisodes(id).length) {
         return api.getEpisodes(id).then(response => (
