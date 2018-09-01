@@ -9,11 +9,12 @@
         >
           <span
             v-for="seasonNumber in seasonNumbers"
+            :id="navName(seasonNumber)"
             :key="seasonNumber"
+            :class="isSelected(seasonNumber)"
             class="nav-item"
           >
             <a
-              :id="navName(seasonNumber)"
               :href="anchoredSeasonName(seasonNumber)"
               @click="scrollTo(seasonNumber)"
             >
@@ -32,7 +33,13 @@
         v-for="(episodes, seasonNumber) in groupedEpisodes"
         :key="seasonNumber"
       >
-        <h3 :id="seasonName(seasonNumber)">
+        <h3
+          :id="seasonName(seasonNumber)"
+          v-observe-visibility="{
+            callback: (isVisible, entry) => visibilityChanged(isVisible, entry, seasonNumber),
+            throttle: 300,
+          }"
+        >
           <a :href="anchoredSeasonName(seasonNumber)">Season {{ seasonNumber }}</a>
         </h3>
         <EpisodesList :episodes="episodes" />
@@ -51,6 +58,7 @@ export default {
   },
   data: () => ({
     isFixed: false,
+    selectedNav: '',
   }),
   props: {
     groupedEpisodes: {
@@ -64,6 +72,9 @@ export default {
     },
   },
   methods: {
+    isSelected(seasonNumber) {
+      return this.selectedNav === this.navName(seasonNumber) ? 'selected' : '';
+    },
     seasonName(seasonNumber) {
       return `season-${seasonNumber}`;
     },
@@ -76,6 +87,12 @@ export default {
     scrollTo(seasonNumber) {
       this.$scrollTo(this.anchoredSeasonName(seasonNumber));
     },
+    visibilityChanged(isVisible, entry, seasonNumber) {
+      if (!isVisible) {
+        return;
+      }
+      this.selectedNav = this.navName(seasonNumber);
+    },
   },
 };
 </script>
@@ -84,9 +101,9 @@ export default {
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
-
-  .nav-item {
-    display: inline-block;
-  }
+}
+.nav-item.selected {
+  display: inline-block;
+  background-color: red;
 }
 </style>
