@@ -1,19 +1,32 @@
 <template>
   <fade-transition>
-    <div>
+    <div sticky-container>
       <div>
-        <span
-          v-for="seasonNumber in seasonNumbers"
-          :key="seasonNumber"
+        <div
+          id="tv-top"
+          v-sticky sticky-offset="offset" sticky-side="top"
+          class="nav"
         >
-          <a
-            :href="anchoredSeasonName(seasonNumber)"
-            @click="scrollTo(anchoredSeasonName(seasonNumber))"
+          <span
+            v-for="seasonNumber in seasonNumbers"
+            :key="seasonNumber"
+            class="nav-item"
           >
-            Season {{ seasonNumber }}
-          </a>
-          &nbsp;
-        </span>
+            <a
+              :id="navName(seasonNumber)"
+              :href="anchoredSeasonName(seasonNumber)"
+              @click="scrollTo(seasonNumber)"
+            >
+              Season {{ seasonNumber }}
+            </a>
+            &nbsp;
+          </span>
+          <span>
+            <a href="#tv-top" @click="scrollTo('#tv-top')">
+              Back to top
+            </a>
+          </span>
+        </div>
       </div>
       <div
         v-for="(episodes, seasonNumber) in groupedEpisodes"
@@ -36,6 +49,9 @@ export default {
     FadeTransition,
     EpisodesList,
   },
+  data: () => ({
+    isFixed: false,
+  }),
   props: {
     groupedEpisodes: {
       type: Object,
@@ -54,9 +70,23 @@ export default {
     anchoredSeasonName(seasonNumber) {
       return `#${this.seasonName(seasonNumber)}`;
     },
-    scrollTo(elementSelector) {
-      this.$scrollTo(elementSelector);
+    navName(seasonNumber) {
+      return `${this.seasonName(seasonNumber)}-nav`;
+    },
+    scrollTo(seasonNumber) {
+      this.$scrollTo(this.anchoredSeasonName(seasonNumber));
     },
   },
 };
 </script>
+<style>
+.nav {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+
+  .nav-item {
+    display: inline-block;
+  }
+}
+</style>
