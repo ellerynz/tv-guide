@@ -8,7 +8,11 @@ import store from './store';
 import './registerServiceWorker';
 
 Vue.config.productionTip = false;
-Vue.use(VueScrollTo);
+Vue.use(VueScrollTo, {
+  duration: 500,
+  ease: 'ease-in',
+  offset: -25,
+});
 Vue.use(Sticky);
 Vue.use(VueObserveVisibility);
 

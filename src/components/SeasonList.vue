@@ -37,7 +37,7 @@
           :id="seasonName(seasonNumber)"
           v-observe-visibility="{
             callback: (isVisible, entry) => visibilityChanged(isVisible, entry, seasonNumber),
-            throttle: 300,
+            throttle: 100,
           }"
         >
           <a :href="anchoredSeasonName(seasonNumber)">Season {{ seasonNumber }}</a>
@@ -101,9 +101,18 @@ export default {
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
+  background: white;
 }
-.nav-item.selected {
+
+.nav-item {
   display: inline-block;
-  background-color: red;
+  -webkit-transition: background-color 0.3s ease-out;
+  -moz-transition: background-color 0.3s ease-out;
+  -o-transition: background-color 0.3s ease-out;
+  transition: background-color 0.3s ease-out;
+}
+
+.nav-item.selected {
+  background-color: salmon;
 }
 </style>
