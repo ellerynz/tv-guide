@@ -5,14 +5,14 @@
         <div
           id="tv-top"
           v-sticky sticky-offset="offset" sticky-side="top"
-          class="nav"
+          class="nav horizontal-scroll"
         >
           <span
             v-for="seasonNumber in seasonNumbers"
             :id="navName(seasonNumber)"
             :key="seasonNumber"
             :class="isSelected(seasonNumber)"
-            class="nav-item"
+            class="nav-item horizontal-scroll-item"
           >
             <a
               :href="anchoredSeasonName(seasonNumber)"
@@ -59,6 +59,7 @@ export default {
   data: () => ({
     isFixed: false,
     selectedNav: '',
+    visibleNavs: new Set([]),
   }),
   props: {
     groupedEpisodes: {
@@ -87,25 +88,43 @@ export default {
     scrollTo(seasonNumber) {
       this.$scrollTo(this.anchoredSeasonName(seasonNumber));
     },
+    scrollTop() {
+      return Math.max(
+        window.pageYOffset,
+        document.documentElement.scrollTop,
+        document.body.scrollTop,
+      );
+    },
+    activateNav() {
+      const topMostAnchor = Math.min(...this.visibleNavs);
+      this.selectedNav = this.navName(topMostAnchor);
+    },
     visibilityChanged(isVisible, entry, seasonNumber) {
       if (!isVisible) {
+        this.visibleNavs.delete(seasonNumber);
         return;
       }
-      this.selectedNav = this.navName(seasonNumber);
+      this.visibleNavs.add(seasonNumber);
+      this.activateNav();
     },
   },
 };
 </script>
 <style>
-.nav {
+.horizontal-scroll {
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
+}
+.horizontal-scroll-item {
+  display: inline-block;
+}
+
+.nav {
   background: white;
 }
 
 .nav-item {
-  display: inline-block;
   -webkit-transition: background-color 0.3s ease-out;
   -moz-transition: background-color 0.3s ease-out;
   -o-transition: background-color 0.3s ease-out;
