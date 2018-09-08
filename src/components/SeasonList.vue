@@ -22,39 +22,35 @@
             </a>
             &nbsp;
           </span>
-          <span>
-            <a href="#tv-top" @click="scrollTo('#tv-top')">
-              Back to top
-            </a>
-          </span>
         </div>
       </div>
       <div
         v-for="(episodes, seasonNumber) in groupedEpisodes"
         :key="seasonNumber"
       >
-        <h3
-          :id="seasonName(seasonNumber)"
-          v-observe-visibility="{
-            callback: (isVisible, entry) => visibilityChanged(isVisible, entry, seasonNumber),
-            throttle: 100,
-          }"
-        >
-          <a :href="anchoredSeasonName(seasonNumber)">Season {{ seasonNumber }}</a>
-        </h3>
-        <EpisodesList :episodes="episodes" />
+          <h2
+            :id="seasonName(seasonNumber)"
+            v-observe-visibility="{
+              callback: (isVisible, entry) => visibilityChanged(isVisible, entry, seasonNumber),
+              throttle: 100,
+            }"
+            class='heading'
+          >
+            <a :href="anchoredSeasonName(seasonNumber)">Season {{ seasonNumber }}</a>
+          </h2>
+        <SeasonListItem :episodes="episodes" />
       </div>
     </div>
   </fade-transition>
 </template>
 <script>
 import { FadeTransition } from 'vue2-transitions';
-import EpisodesList from './EpisodesList.vue';
+import SeasonListItem from './SeasonListItem.vue';
 
 export default {
   components: {
     FadeTransition,
-    EpisodesList,
+    SeasonListItem,
   },
   data: () => ({
     isFixed: false,
@@ -115,13 +111,18 @@ export default {
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
+  scroll-snap-type: x mandatory;
 }
 .horizontal-scroll-item {
   display: inline-block;
+  scroll-snap-align: center;
+  position: relative;
 }
 
 .nav {
   background: white;
+  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+  padding: 8px;
 }
 
 .nav-item {
@@ -129,9 +130,16 @@ export default {
   -moz-transition: background-color 0.3s ease-out;
   -o-transition: background-color 0.3s ease-out;
   transition: background-color 0.3s ease-out;
+  padding: 4px 6px;
+  border-radius: 8px;
 }
 
 .nav-item.selected {
   background-color: salmon;
+}
+
+.heading {
+  font-weight: bold;
+  padding: 16px 8px 8px 16px;
 }
 </style>

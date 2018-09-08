@@ -28,3 +28,11 @@ export default {
   },
 };
 </script>
+<style scoped="true">
+li:first-child {
+  padding-left: 12px;
+}
+li:last-child {
+  padding-right: 12px;
+}
+</style>
