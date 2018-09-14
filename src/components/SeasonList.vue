@@ -8,10 +8,11 @@
           class="nav horizontal-scroll"
         >
           <span
-            v-for="seasonNumber in seasonNumbers"
-            :id="navName(seasonNumber)"
+            v-for="(seasonNumber) in seasonNumbers"
             :key="seasonNumber"
+            :id="navName(seasonNumber)"
             :class="isSelected(seasonNumber)"
+            :ref="navName(seasonNumber)"
             class="nav-item horizontal-scroll-item"
           >
             <a
@@ -30,11 +31,8 @@
       >
           <h2
             :id="seasonName(seasonNumber)"
-            v-observe-visibility="{
-              callback: (isVisible, entry) => visibilityChanged(isVisible, entry, seasonNumber),
-              throttle: 100,
-            }"
             class='heading'
+            v-observe-visibility="intersectionOptions(seasonNumber)"
           >
             <a :href="anchoredSeasonName(seasonNumber)">Season {{ seasonNumber }}</a>
           </h2>
@@ -46,6 +44,7 @@
 <script>
 import { FadeTransition } from 'vue2-transitions';
 import SeasonListItem from './SeasonListItem.vue';
+import { getScrollTop } from '../helpers';
 
 export default {
   components: {
@@ -55,7 +54,7 @@ export default {
   data: () => ({
     isFixed: false,
     selectedNav: '',
-    visibleNavs: new Set([]),
+    isTravellingByAnchor: false,
   }),
   props: {
     groupedEpisodes: {
@@ -67,10 +66,28 @@ export default {
     seasonNumbers() {
       return Object.keys(this.groupedEpisodes);
     },
+    noSelectedNav() {
+      return this.selectedNav.length === 0;
+    },
+  },
+  watch: {
+    selectedNav(newValue) {
+      if (newValue.length === 0) {
+        return;
+      }
+      this.$refs[newValue][0].scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+      });
+    },
   },
   methods: {
     isSelected(seasonNumber) {
-      return this.selectedNav === this.navName(seasonNumber) ? 'selected' : '';
+      const shouldSelectFirst = this.noSelectedNav && seasonNumber === this.seasonNumbers[0];
+      if (shouldSelectFirst || this.selectedNav === this.navName(seasonNumber)) {
+        return 'selected';
+      }
+      return '';
     },
     seasonName(seasonNumber) {
       return `season-${seasonNumber}`;
@@ -82,26 +99,39 @@ export default {
       return `${this.seasonName(seasonNumber)}-nav`;
     },
     scrollTo(seasonNumber) {
-      this.$scrollTo(this.anchoredSeasonName(seasonNumber));
+      this.isTravellingByAnchor = true;
+      const component = this;
+      this.$scrollTo(this.anchoredSeasonName(seasonNumber), 500, {
+        onDone: () => {
+          component.activateNav(seasonNumber);
+          component.isTravellingByAnchor = false;
+        },
+      });
     },
-    scrollTop() {
-      return Math.max(
-        window.pageYOffset,
-        document.documentElement.scrollTop,
-        document.body.scrollTop,
-      );
-    },
-    activateNav() {
-      const topMostAnchor = Math.min(...this.visibleNavs);
-      this.selectedNav = this.navName(topMostAnchor);
+    activateNav(seasonNumber) {
+      this.selectedNav = this.navName(seasonNumber);
     },
     visibilityChanged(isVisible, entry, seasonNumber) {
-      if (!isVisible) {
-        this.visibleNavs.delete(seasonNumber);
+      if (!isVisible || !entry.isIntersecting) {
         return;
       }
-      this.visibleNavs.add(seasonNumber);
-      this.activateNav();
+      if (getScrollTop() === 0) {
+        this.activateNav(this.seasonNumbers[0]);
+        return;
+      }
+      this.activateNav(seasonNumber);
+    },
+    intersectionOptions(seasonNumber) {
+      return {
+        callback: (isVisible, entry) => (
+          this.visibilityChanged(isVisible, entry, seasonNumber)
+        ),
+        throttle: 50,
+        intersection: {
+          rootMargin: '-20% 0px -50%',
+        },
+        threshold: 0.5,
+      };
     },
   },
 };
@@ -135,7 +165,11 @@ export default {
 }
 
 .nav-item.selected {
-  background-color: salmon;
+  background-color: #383838;
+}
+
+.nav-item.selected a {
+  color: white !important;
 }
 
 .heading {

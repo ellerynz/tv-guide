@@ -34,6 +34,7 @@ export default {
 
   a {
     text-decoration: none;
+    color: #383838;
   }
 }
 </style>
