@@ -1,12 +1,19 @@
 <template>
   <figure>
-    <img :src="imageUrl" />
+    <LazyImage
+      :alt="name"
+      :src="imageUrl"
+      :width="250"
+      :height="140"
+    />
     <figcaption>
       <h3>{{ name }}</h3>
     </figcaption>
   </figure>
 </template>
 <script>
+import LazyImage from './LazyImage.vue';
+
 export default {
   props: {
     id: {
@@ -22,6 +29,9 @@ export default {
       required: false,
       default: () => ({}),
     },
+  },
+  components: {
+    LazyImage,
   },
   computed: {
     imageUrl() {

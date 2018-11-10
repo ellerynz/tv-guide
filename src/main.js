@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueScrollTo from 'vue-scrollto';
 import Sticky from 'vue-sticky-directive';
 import VueObserveVisibility from 'vue-observe-visibility';
+import VueLazyload from 'vue-lazyload';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -15,6 +16,13 @@ Vue.use(VueScrollTo, {
 });
 Vue.use(Sticky);
 Vue.use(VueObserveVisibility);
+Vue.use(VueLazyload, {
+  observer: true,
+  observerOptions: {
+    rootMargin: '0% 0% 10% 0%',
+    threshold: 0.1,
+  },
+});
 
 new Vue({
   router,
