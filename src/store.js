@@ -36,62 +36,72 @@ export const getters = {
 };
 /* eslint-enable no-shadow */
 
+/* eslint-disable no-param-reassign */
+const mutations = {
+  addShows: (state, shows) => {
+    state.tvShows = [...state.tvShows, ...shows];
+  },
+  selectShow: (state, id) => {
+    state.selectedShowId = id;
+  },
+  resetShow: (state) => {
+    state.selectedShowId = '';
+  },
+  addEpisodes: (state, { id, episodes }) => {
+    state.episodes = {
+      ...state.episodes,
+      ...{ [id]: episodes },
+    };
+  },
+};
+/* eslint-enable no-param-reassign */
+
+const actions = {
+  // eslint-disable-next-line no-shadow
+  findShow: ({ commit, getters }, { id }) => {
+    // Check for the show locally first
+    if (getters.findShow(id)) {
+      commit('selectShow', id);
+      return id;
+    }
+
+    return api.findShow(id).then((response) => {
+      commit('addShows', [response]);
+      commit('selectShow', id);
+    });
+  },
+  listShows: ({ commit }) => (
+    api.listShows().then(response => (
+      commit('addShows', response)
+    ))
+  ),
+  getNextShowsBatch: ({ commit }) => {
+    api.getShows().then((nextBatch) => {
+      commit('addShows', nextBatch);
+    });
+  },
+  // eslint-disable-next-line no-shadow
+  fetchEpisodes: ({ commit, getters }, { id }) => {
+    if (!getters.getEpisodes(id).length) {
+      return api.getEpisodes(id).then(response => (
+        commit('addEpisodes', {
+          id,
+          episodes: response,
+        })
+      ));
+    }
+    return ''; // We don't actually care what is returned
+  },
+};
+
 export default new Vuex.Store({
   state: {
+    batchSize: 25,
     tvShows: [],
     episodes: {},
     selectedShowId: '',
   },
   getters,
-  /* eslint-disable no-param-reassign */
-  mutations: {
-    addShows: (state, shows) => {
-      state.tvShows = shows;
-    },
-    selectShow: (state, id) => {
-      state.selectedShowId = id;
-    },
-    resetShow: (state) => {
-      state.selectedShowId = '';
-    },
-    addEpisodes: (state, { id, episodes }) => {
-      state.episodes = {
-        ...state.episodes,
-        ...{ [id]: episodes },
-      };
-    },
-  },
-  /* eslint-enable no-param-reassign */
-  actions: {
-    // eslint-disable-next-line no-shadow
-    findShow: ({ commit, getters }, { id }) => {
-      // Check for the show locally first
-      if (getters.findShow(id)) {
-        commit('selectShow', id);
-        return id;
-      }
-
-      return api.findShow(id).then((response) => {
-        commit('addShows', [response]);
-        commit('selectShow', id);
-      });
-    },
-    listShows: ({ commit }) => (
-      api.listShows().then(response => (
-        commit('addShows', response)
-      ))
-    ),
-    // eslint-disable-next-line no-shadow
-    fetchEpisodes: ({ commit, getters }, { id }) => {
-      if (!getters.getEpisodes(id).length) {
-        return api.getEpisodes(id).then(response => (
-          commit('addEpisodes', {
-            id,
-            episodes: response,
-          })
-        ));
-      }
-      return ''; // We don't actually care what is returned
-    },
-  },
+  mutations,
+  actions,
 });

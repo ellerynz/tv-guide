@@ -9,11 +9,10 @@ describe('store', () => {
       state = {
         tvShows: [],
         episodes: {},
-        selectedShowId: '',
       };
     });
 
-    describe('grouping episodes by season', () => {
+    describe('groupEpisodesBySeasons', () => {
       let result;
 
       beforeEach(() => {
