@@ -52,13 +52,20 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped="true">
 img[lazy=loaded] {
   opacity: 1;
   transition: opacity 0.3s;
 }
+
+img[lazy=error] {
+  background-color: salmon;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
 img[lazy=loading], .loading-image {
-  background: #fff;
+  background-color: aqua;
   border: 1px solid;
   border-color: #e5e6e9 #dfe0e4 #d0d1d5;
   border-radius: 3px;
