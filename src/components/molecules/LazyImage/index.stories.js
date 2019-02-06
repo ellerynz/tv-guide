@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/vue';
 import { withKnobs, text, number } from '@storybook/addon-knobs/vue';
-import LazyImage from './LazyImage.vue';
+import LazyImage from './index.vue';
 
 const computed = {
   alt() {
@@ -17,7 +17,7 @@ const computed = {
   },
 };
 
-storiesOf('LazyImage', module)
+storiesOf('Molecules/LazyImage', module)
   .addDecorator(withKnobs)
   .add('Default', () => ({
     components: { LazyImage },

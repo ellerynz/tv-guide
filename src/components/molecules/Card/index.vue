@@ -7,36 +7,31 @@
       :height="140"
     />
     <figcaption>
-      <h3>{{ name }}</h3>
+      <Heading :level="3">
+        {{ name }}
+      </Heading>
     </figcaption>
   </figure>
 </template>
 <script>
-import LazyImage from './LazyImage.vue';
+import Heading from '../../atoms/Heading/index.vue';
+import LazyImage from '../LazyImage/index.vue';
 
 export default {
   props: {
-    id: {
-      type: Number,
-      required: true,
-    },
     name: {
       type: String,
       required: true,
     },
-    image: {
-      type: Object,
+    imageUrl: {
+      type: String,
       required: false,
-      default: () => ({}),
+      default: () => '',
     },
   },
   components: {
+    Heading,
     LazyImage,
-  },
-  computed: {
-    imageUrl() {
-      return (this.image && this.image.medium) || '';
-    },
   },
 };
 </script>
@@ -50,10 +45,10 @@ figure {
   background-color: white;
 }
 h3 {
-  padding: 18px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   font-weight: bold;
+  overflow: hidden;
+  padding: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>

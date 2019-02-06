@@ -18,7 +18,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import LazyImage from './LazyImage.vue';
+import LazyImage from '@/components/molecules/LazyImage/index.vue';
 
 export default {
   name: 'HelloWorld',
@@ -46,11 +46,7 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
+<style scoped="true">
 ul {
   list-style-type: none;
   padding: 0;
