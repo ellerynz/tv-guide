@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-unused-vars
+import IntersectionOberver from 'intersection-observer'; // Polyfill
 import Vue from 'vue';
 import VueScrollTo from 'vue-scrollto';
 import Sticky from 'vue-sticky-directive';

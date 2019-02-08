@@ -6,19 +6,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>tv-guide</title>
-    <script>
-      var scripts = [];
-      if (!window.IntersectionObserver) {
-        scripts.unshift('/polyfills.js');
-      }
-
-      scripts.map(function(src) {
-        var scriptElement = document.createElement('script');
-        scriptElement.async = false;
-        scriptElement.src = src;
-        document.head.appendChild(scriptElement);
-      });
-    </script>
   </head>
   <body>
     <noscript>
